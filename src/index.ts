@@ -1,7 +1,7 @@
+import Vue from 'vue'
+import app from './App.vue'
 import "./index.scss";
 
-function getName(name: String) {
-    return name;
-}
-
-console.log(getName('hello'));
+new Vue({
+  render: h => h(app)
+}).$mount('#root')

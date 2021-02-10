@@ -3,6 +3,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin').CleanWebpackPlugin;
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 module.exports = {
   entry: './src/index.ts',
@@ -12,7 +13,7 @@ module.exports = {
     filename: 'index.js',
   },
   resolve: {
-    extensions: ['.ts', '.tsx', '.js'],
+    extensions: ['.ts', '.tsx', '.js', '.vue'],
   },
   devtool: 'source-map',
   devServer: {
@@ -26,6 +27,8 @@ module.exports = {
       {
         test: /\.tsx?$/,
         loader: 'ts-loader',
+        options: { appendTsSuffixTo: [/\.vue$/] },
+        exclude: /node_modules/,
       },
       {
         test: /\.(sa|sc|c)ss$/,
@@ -38,6 +41,10 @@ module.exports = {
           'postcss-loader',
           'sass-loader',
         ],
+      },
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader',
       }
     ],
   },
@@ -65,5 +72,6 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: 'index.css',
     }),
+     new VueLoaderPlugin()
   ],
 };
