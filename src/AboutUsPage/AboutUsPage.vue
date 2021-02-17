@@ -1,15 +1,13 @@
-<template src='./template.html'></template>
+<template src="./template.html" />
 
 <script lang="ts">
-import Vue from 'vue'
-import {store} from '../store/index'
+import Vue from 'vue';
 export default Vue.extend({
     name: 'AboutUsPage',
-    store,
     methods: {
-       decrement () {
-    	store.commit('decrement')
-    }
-    }
-})
+        decrement() {
+            this.$store.commit('decrement');
+        },
+    },
+});
 </script>

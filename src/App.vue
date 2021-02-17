@@ -1,42 +1,40 @@
 <template>
-  <div id="app">
-    <nav class="app-nav">
-    <router-link to="/main-page">Go to Main Page</router-link>
-    <router-link to="/about-us-page">Go to About Us Page</router-link>
-  </nav>
-    <p>{{ count }}</p>
-   <router-view></router-view>
-   </div>
+    <div id="app">
+        <nav class="app-nav">
+            <router-link to="/main-page">Go to Main Page</router-link>
+            <router-link to="/about-us-page">Go to About Us Page</router-link>
+        </nav>
+        <p>{{ count }}</p>
+        <router-view />
+    </div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import {store} from './store/index'
-import router from './router'
-
+import Vue from 'vue';
+import router from './router';
+import { store } from './store/index';
 export default Vue.extend({
     name: 'app',
     store,
     router,
     computed: {
-        count () {
-	      return store.state.count
-      }
-    }
-})
+        count() {
+            return store.state.count;
+        },
+    },
+});
 </script>
-
 
 <style>
 #app {
-  font-family: Helvetica, Arial, sans-serif;
-  text-align: center;
-  color: #2c3e50;
-  margin: 60px auto;
-  max-width: 500px;
+    font-family: Helvetica, Arial, sans-serif;
+    text-align: center;
+    color: #2c3e50;
+    margin: 60px auto;
+    max-width: 500px;
 }
-.app-nav{
-display: flex;
-justify-content: space-between;
+.app-nav {
+    display: flex;
+    justify-content: space-between;
 }
 </style>
