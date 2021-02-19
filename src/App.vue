@@ -12,14 +12,12 @@
 <script lang="ts">
 import Vue from 'vue';
 import router from './router';
-import { store } from './store/index';
 export default Vue.extend({
     name: 'app',
-    store,
     router,
     computed: {
         count() {
-            return store.state.count;
+            return this.$store.state.count;
         },
     },
 });
