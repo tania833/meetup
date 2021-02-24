@@ -5,6 +5,7 @@
             <router-link to="/about-us-page">Go to About Us Page</router-link>
         </nav>
         <p>{{ count }}</p>
+        <v-btn elevation="2">Button</v-btn>
         <router-view />
     </div>
 </template>
