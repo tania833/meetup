@@ -1,7 +1,10 @@
-import "./index.scss";
+import Vue from 'vue';
+import app from './App.vue';
+import './index.scss';
+import { createStore } from './store/index'
 
-function getName(name: String) {
-    return name;
-}
-
-console.log(getName('hello'));
+const App = new Vue({
+    el: '#root',
+    store: createStore(),
+    render: (h) => h(app),
+});
