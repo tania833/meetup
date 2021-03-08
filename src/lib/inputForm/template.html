@@ -1,0 +1,57 @@
+<div id="appInputForm">
+    <v-app id="inspire">
+        <v-form v-model="valid">
+            <v-container>
+                <v-row>
+                    <v-col cols="12">
+                        <v-text-field
+                            v-model="eventname"
+                            :rules="nameRules"
+                            label="Event name"
+                            required
+                        ></v-text-field>
+                    </v-col>
+
+                    <v-col cols="12">
+                        <v-text-field
+                            v-model="email"
+                            :rules="emailRules"
+                            label="E-mail"
+                            required
+                        ></v-text-field>
+                    </v-col>
+
+                    <v-col cols="12">
+                        <v-text-field
+                            v-model="date"
+                            :rules="dateRules"
+                            label="Date"
+                            required
+                        ></v-text-field>
+                    </v-col>
+
+                    <v-col cols="12">
+                        <v-text-field
+                            v-model="location"
+                            :rules="locationRules"
+                            label="Location"
+                            required
+                        ></v-text-field>
+                    </v-col>
+
+                    <v-col cols="12">
+                        <v-text-field
+                            v-model="attendees"
+                            :rules="attendeesRules"
+                            label="Attendees"
+                            required
+                        ></v-text-field>
+                    </v-col>
+                </v-row>
+                <v-btn depressed color="error" type="submit">
+                    CREATE EVENT
+                </v-btn>
+            </v-container>
+        </v-form>
+    </v-app>
+</div>

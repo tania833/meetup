@@ -4,6 +4,7 @@
     "description": "",
     "main": "src/index.js",
     "dependencies": {
+        "@mdi/js": "^5.9.55",
         "vue": "^2.6.12",
         "vue-router": "^3.5.1",
         "vuetify": "^2.4.4",
