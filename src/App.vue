@@ -20,6 +20,9 @@ export default Vue.extend({
     components: { AppNavigation },
     name: 'app',
     router,
+    created() {
+        this.$store.dispatch('getMeetings');
+    },
 });
 </script>
 
