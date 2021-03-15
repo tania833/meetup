@@ -8,7 +8,7 @@ export default Vue.extend({
     vuetify: new Vuetify(),
     data: () => ({
         valid: false,
-        eventname: '',
+        eventName: '',
         nameRules: [(v) => !!v || 'Name is required'],
         email: '',
         emailRules: [
@@ -28,5 +28,19 @@ export default Vue.extend({
         attendees: '',
         attendeesRules: [(v) => !!v || 'Attendees are required'],
     }),
+    methods: {
+        submit() {
+            const meeting = JSON.stringify({
+                eventname: this.eventName,
+                email: this.email,
+                date: this.date,
+                location: this.location,
+                attendees: this.attendees,
+            });
+            this.$store.dispatch('addMeeting', meeting);
+            this.$refs.meetupForm.reset();
+            alert('Event created!');
+        },
+    },
 });
 </script>
