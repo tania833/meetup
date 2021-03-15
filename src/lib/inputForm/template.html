@@ -1,11 +1,17 @@
 <div id="appInputForm">
     <v-app id="inspire">
-        <v-form v-model="valid">
+        <v-form
+            method="post"
+            ref="meetupForm"
+            id="meetupForm"
+            v-model="valid"
+            @submit.prevent="submit"
+        >
             <v-container>
                 <v-row>
                     <v-col cols="12">
                         <v-text-field
-                            v-model="eventname"
+                            v-model="eventName"
                             :rules="nameRules"
                             label="Event name"
                             required

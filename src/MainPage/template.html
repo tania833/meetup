@@ -1,1 +1,8 @@
-<div>There are no events yet</div>
+<div class="mainPage-content">
+    <div v-if="fetchedAllMeetings.length > 0">
+        <div v-for="meeting in fetchedAllMeetings" :key="meeting.id">
+            <meeting-card v-bind:meeting="meeting"></meeting-card>
+        </div>
+    </div>
+        <div v-else>There are no events yet</div>
+</div>
