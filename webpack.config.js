@@ -33,6 +33,7 @@ module.exports = {
             {
                 test: /\.(sa|sc|c)ss$/,
                 use: [
+                    'vue-style-loader',
                     {
                         loader: MiniCssExtractPlugin.loader,
                         options: {},
