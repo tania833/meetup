@@ -1,5 +1,5 @@
 <div class="mainPage-content">
-    <div v-if="fetchedAllMeetings.length > 0">
+    <div v-if="fetchedAllMeetings.length">
         <div v-for="meeting in fetchedAllMeetings" :key="meeting.id">
             <meeting-card v-bind:meeting="meeting"></meeting-card>
         </div>
