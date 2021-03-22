@@ -2,11 +2,10 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import Vuetify from 'vuetify/lib';
 export default Vue.extend({
     name: 'app-input-form',
-    vuetify: new Vuetify(),
     data: () => ({
+        error: [],
         valid: false,
         eventName: '',
         nameRules: [(v) => !!v || 'Name is required'],
@@ -30,16 +29,27 @@ export default Vue.extend({
     }),
     methods: {
         submit() {
-            const meeting = JSON.stringify({
-                eventname: this.eventName,
-                email: this.email,
-                date: this.date,
-                location: this.location,
-                attendees: this.attendees,
-            });
-            this.$store.dispatch('addMeeting', meeting);
-            this.$refs.meetupForm.reset();
-            alert('Event created!');
+            if (
+                !this.eventName ||
+                !this.email ||
+                !this.date ||
+                !this.location ||
+                !this.attendees
+            ) {
+                this.error.push('Fill the form!');
+                return false;
+            } else {
+                this.error = [];
+                const meeting = {
+                    eventname: this.eventName,
+                    email: this.email,
+                    date: this.date,
+                    location: this.location,
+                    attendees: this.attendees,
+                };
+                this.$store.dispatch('addMeeting', meeting);
+                this.$refs.meetupForm.reset();
+            }
         },
     },
 });

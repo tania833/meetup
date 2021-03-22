@@ -2,10 +2,8 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import Vuetify from 'vuetify/lib';
 export default Vue.extend({
     name: 'meeting-card',
-    vuetify: new Vuetify(),
     props: ['meeting'],
     data() {
         return {
@@ -19,3 +17,9 @@ export default Vue.extend({
     },
 });
 </script>
+
+<style>
+.meeting-card {
+    margin: 10px;
+}
+</style>
