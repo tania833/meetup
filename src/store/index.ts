@@ -12,7 +12,6 @@ export const createStore = () =>
         mutations: {
             FETCH_MEETINGS(state, meetings) {
                 state.meetings = meetings;
-                console.log(state.meetings);
             },
         },
         getters: {
@@ -30,12 +29,9 @@ export const createStore = () =>
                     .catch((err) => console.log(err));
             },
             addMeeting(state, meeting) {
+                console.log(meeting);
                 axios
-                    .post('http://localhost:8000/event-add', meeting, {
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                    })
+                    .post('http://localhost:8000/event-add', meeting)
                     .then(() => {
                         console.log('Event added');
                     })

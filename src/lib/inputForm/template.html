@@ -1,5 +1,8 @@
 <div id="appInputForm">
     <v-app id="inspire">
+        <p v-if="error.length">
+              <p>{{ error[0] }}</p>
+          </p>
         <v-form
             method="post"
             ref="meetupForm"

@@ -15,7 +15,7 @@ export default Vue.extend({
 </script>
 
 <style>
-.mainPage-content{
+.mainPage-content {
     margin: 10px;
 }
 </style>
