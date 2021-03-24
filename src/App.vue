@@ -22,9 +22,6 @@ export default Vue.extend({
     name: 'app',
     router,
     vuetify: new Vuetify(),
-    created() {
-        this.$store.dispatch('getMeetings');
-    },
 });
 </script>
 
@@ -46,5 +43,8 @@ a {
 }
 .app-logo {
     width: 100px;
+}
+ul {
+    list-style: none;
 }
 </style>

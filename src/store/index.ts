@@ -7,35 +7,30 @@ Vue.use(Vuex);
 export const createStore = () =>
     new Vuex.Store({
         state: {
-            meetings: [],
+            events: [],
         },
         mutations: {
-            FETCH_MEETINGS(state, meetings) {
-                state.meetings = meetings;
-            },
-        },
-        getters: {
-            allMeetings: (state) => {
-                return state.meetings;
+            FETCH_EVENTS(state, events) {
+                state.events = events;
             },
         },
         actions: {
-            getMeetings({ commit }) {
+            getEvents({ commit }) {
                 axios
                     .get('http://localhost:8000/all-events')
                     .then((response) => {
-                        commit('FETCH_MEETINGS', response.data);
+                        commit('FETCH_EVENTS', response.data);
                     })
                     .catch((err) => console.log(err));
             },
-            addMeeting(state, meeting) {
-                console.log(meeting);
+            addEvent(state, event) {
                 axios
-                    .post('http://localhost:8000/event-add', meeting)
+                    .post('http://localhost:8000/event-add', event)
                     .then(() => {
                         console.log('Event added');
                     })
                     .catch((err) => console.log(err));
+                // show user event was added/not (error propagation)
             },
         },
     });

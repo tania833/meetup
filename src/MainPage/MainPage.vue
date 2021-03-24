@@ -2,13 +2,16 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import MeetingCard from '../lib/meetingCard/MeetingCard.vue';
+import EventCard from '../lib/eventCard/EventCard.vue';
 export default Vue.extend({
     name: 'MainPage',
-    components: { MeetingCard },
+    components: { EventCard },
+    beforeMount() {
+        this.$store.dispatch('getEvents');
+    },
     computed: {
-        fetchedAllMeetings() {
-            return this.$store.getters.allMeetings;
+        allEvents() {
+            return this.$store.state.events;
         },
     },
 });

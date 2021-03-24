@@ -40,14 +40,14 @@ export default Vue.extend({
                 return false;
             } else {
                 this.error = [];
-                const meeting = {
+                const event = {
                     eventname: this.eventName,
                     email: this.email,
                     date: this.date,
                     location: this.location,
                     attendees: this.attendees,
                 };
-                this.$store.dispatch('addMeeting', meeting);
+                this.$store.dispatch('addEvent', event);
                 this.$refs.meetupForm.reset();
             }
         },
