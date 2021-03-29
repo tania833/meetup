@@ -47,7 +47,17 @@ export default Vue.extend({
                     location: this.location,
                     attendees: this.attendees,
                 };
-                this.$store.dispatch('addEvent', event);
+                this.$store
+                    .dispatch('addEvent', event)
+                    .then((res) => {
+                        if (res.status === 200) {
+                            this.$store.commit('SUCCESS_EVENT_ADDED', true);
+                        }
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                        this.commit('FAILURE_EVENT_ADDING', true);
+                    });
                 this.$refs.meetupForm.reset();
             }
         },

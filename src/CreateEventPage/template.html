@@ -1,3 +1,17 @@
 <div>
+    <modal
+        v-if="showModalSuccess"
+        @close="closeSucess"
+        title="Success"
+        subtitle="Event added!"
+        propColor="#32CD32"
+    />
+    <modal
+        v-if="showModalFailure"
+        @close="closeFailure"
+        title="Failure"
+        subtitle="Error occured"
+        propColor="red"
+    />
     <app-input-form />
 </div>

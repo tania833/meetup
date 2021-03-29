@@ -8,10 +8,18 @@ export const createStore = () =>
     new Vuex.Store({
         state: {
             events: [],
+            successEventAdded: false,
+            failureEventAdding: false,
         },
         mutations: {
             FETCH_EVENTS(state, events) {
                 state.events = events;
+            },
+            SUCCESS_EVENT_ADDED(state, value) {
+                state.successEventAdded = value;
+            },
+            FAILURE_EVENT_ADDED(state, value) {
+                state.failureEventAdding = value;
             },
         },
         actions: {
@@ -24,13 +32,7 @@ export const createStore = () =>
                     .catch((err) => console.log(err));
             },
             addEvent(state, event) {
-                axios
-                    .post('http://localhost:8000/event-add', event)
-                    .then(() => {
-                        console.log('Event added');
-                    })
-                    .catch((err) => console.log(err));
-                // show user event was added/not (error propagation)
+                return axios.post('http://localhost:8000/event-add', event);
             },
         },
     });
