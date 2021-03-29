@@ -10,16 +10,33 @@ export const createStore = () =>
             events: [],
             successEventAdded: false,
             failureEventAdding: false,
+            successEventDeleted: false,
+            failureEventDeleted: false,
         },
         mutations: {
             FETCH_EVENTS(state, events) {
                 state.events = events;
+            },
+            ADD_EVENT_TO_STORE(state, event) {
+                state.events.push(event);
+            },
+            DELETE_EVENT_FROM_STORE(state, eventId) {
+                const filteredEvents = state.events.filter(
+                    (el) => el.id != eventId
+                );
+                state.events = filteredEvents;
             },
             SUCCESS_EVENT_ADDED(state, value) {
                 state.successEventAdded = value;
             },
             FAILURE_EVENT_ADDED(state, value) {
                 state.failureEventAdding = value;
+            },
+            SUCCESS_EVENT_DELETE(state, value) {
+                state.successEventDeleted = value;
+            },
+            FAILURE_EVENT_DELETE(state, value) {
+                state.failureEventDeleted = value;
             },
         },
         actions: {
@@ -33,6 +50,11 @@ export const createStore = () =>
             },
             addEvent(state, event) {
                 return axios.post('http://localhost:8000/event-add', event);
+            },
+            deleteEvent(state, eventId) {
+                return axios.post('http://localhost:8000/event-delete', {
+                    id: eventId,
+                });
             },
         },
     });

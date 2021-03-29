@@ -5,4 +5,18 @@
         </li>
     </ul>
     <div v-else>There are no events yet</div>
+    <modal
+        v-if="showModalSuccess"
+        @close="closeSucess"
+        title="Success"
+        subtitle="Event deleted"
+        propColor="#32CD32"
+    />
+    <modal
+        v-if="showModalFailure"
+        @close="closeFailure"
+        title="Failure"
+        subtitle="Error occured"
+        propColor="red"
+    />
 </div>

@@ -46,12 +46,14 @@ export default Vue.extend({
                     date: this.date,
                     location: this.location,
                     attendees: this.attendees,
+                    id: Math.random(),
                 };
                 this.$store
                     .dispatch('addEvent', event)
                     .then((res) => {
                         if (res.status === 200) {
                             this.$store.commit('SUCCESS_EVENT_ADDED', true);
+                            this.$store.commit('ADD_EVENT_TO_STORE', event);
                         }
                     })
                     .catch((err) => {

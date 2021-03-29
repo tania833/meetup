@@ -2,6 +2,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import { mdiDelete } from '@mdi/js';
 export default Vue.extend({
     name: 'event-card',
     props: ['event'],
@@ -13,7 +14,26 @@ export default Vue.extend({
             email: this.event.email,
             attendees: this.event.attendees,
             id: this.event.id,
+            icons: {
+                mdiDelete,
+            },
         };
+    },
+    methods: {
+        deleteEvent(id) {
+            this.$store
+                .dispatch('deleteEvent', id)
+                .then((res) => {
+                    if (res.status === 200) {
+                        this.$store.commit('SUCCESS_EVENT_DELETE', true);
+                        this.$store.commit('DELETE_EVENT_FROM_STORE', id);
+                    }
+                })
+                .catch((err) => {
+                    console.log(err);
+                    this.commit('FAILURE_EVENT_DELETE', true);
+                });
+        },
     },
 });
 </script>
