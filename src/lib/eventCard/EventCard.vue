@@ -2,7 +2,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import { mdiDelete } from '@mdi/js';
+import { mdiDelete, mdiPencil } from '@mdi/js';
 export default Vue.extend({
     name: 'event-card',
     props: ['event'],
@@ -16,6 +16,7 @@ export default Vue.extend({
             id: this.event.id,
             icons: {
                 mdiDelete,
+                mdiPencil,
             },
         };
     },
@@ -41,5 +42,11 @@ export default Vue.extend({
 <style>
 .event-card {
     margin: 10px;
+}
+.event-card__icons {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 112px;
 }
 </style>

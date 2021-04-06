@@ -13,7 +13,7 @@ export default Vue.extend({
                 {
                     title: 'Home',
                     icon: mdiViewDashboard,
-                    link: '/main-page',
+                    link: '/',
                 },
                 {
                     title: 'New event',

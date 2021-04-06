@@ -16,6 +16,13 @@
                 >Attendees: {{ attendees }}
             </v-list-item-subtitle>
         </v-list-item-content>
-        <v-icon @click="deleteEvent(id)"> {{ icons.mdiDelete }} </v-icon>
+        <div class="event-card__icons">
+            <router-link :to="{ name: 'eventEditPage', params: { eventId: id }}"
+                ><v-icon>
+                    {{ icons.mdiPencil}}
+                </v-icon></router-link
+            >
+            <v-icon @click="deleteEvent(id)"> {{ icons.mdiDelete }} </v-icon>
+        </div>
     </v-list-item>
 </v-card>

@@ -39,7 +39,6 @@ export default Vue.extend({
 
 .modal-header {
     margin-top: 0;
-    /* color: #32CD32; */
 }
 
 .modal-body {

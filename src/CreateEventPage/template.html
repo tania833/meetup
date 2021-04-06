@@ -13,5 +13,19 @@
         subtitle="Error occured"
         propColor="red"
     />
+    <modal
+        v-if="showModalSuccessEdit"
+        @close="closeSucessEdit"
+        title="Success"
+        subtitle="Event edited!"
+        propColor="#32CD32"
+    />
+    <modal
+        v-if="showModalFailureEdit"
+        @close="closeFailureEdit"
+        title="Failure"
+        subtitle="Error occured while editing"
+        propColor="red"
+    />
     <app-input-form />
 </div>

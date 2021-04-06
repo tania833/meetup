@@ -14,13 +14,11 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import router from './router';
 import Vuetify from 'vuetify/lib';
 import AppNavigation from './lib/navigation/AppNavigation.vue';
 export default Vue.extend({
     components: { AppNavigation },
     name: 'app',
-    router,
     vuetify: new Vuetify(),
 });
 </script>

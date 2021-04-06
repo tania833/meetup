@@ -12,6 +12,9 @@ export const createStore = () =>
             failureEventAdding: false,
             successEventDeleted: false,
             failureEventDeleted: false,
+            successEventEdit: false,
+            failureEventEdit: false,
+            eventEditing: false,
         },
         mutations: {
             FETCH_EVENTS(state, events) {
@@ -19,6 +22,17 @@ export const createStore = () =>
             },
             ADD_EVENT_TO_STORE(state, event) {
                 state.events.push(event);
+            },
+            EDIT_EVENT_IN_STORE(state, eventEdited) {
+                const eventPrevious = state.events.filter(
+                    (el) => el.id === eventEdited.id
+                );
+                const indexOfEventEdited = state.events.indexOf(
+                    eventPrevious[0]
+                );
+                if (indexOfEventEdited != -1) {
+                    state.events[indexOfEventEdited] = eventEdited;
+                }
             },
             DELETE_EVENT_FROM_STORE(state, eventId) {
                 const filteredEvents = state.events.filter(
@@ -38,6 +52,15 @@ export const createStore = () =>
             FAILURE_EVENT_DELETE(state, value) {
                 state.failureEventDeleted = value;
             },
+            SET_EVENT_EDITING(state, value) {
+                state.eventEditing = value;
+            },
+            SUCCESS_EVENT_EDIT(state, value) {
+                state.successEventEdit = value;
+            },
+            FAILURE_EVENT_EDIT(state, value) {
+                state.failureEventEdit = value;
+            },
         },
         actions: {
             getEvents({ commit }) {
@@ -55,6 +78,17 @@ export const createStore = () =>
                 return axios.post('http://localhost:8000/event-delete', {
                     id: eventId,
                 });
+            },
+            getEventById(state, eventId) {
+                return axios.post('http://localhost:8000/event-find-by-id', {
+                    id: eventId,
+                });
+            },
+            updateEvent(state, editedEvent) {
+                return axios.post(
+                    'http://localhost:8000/event-update',
+                    editedEvent
+                );
             },
         },
     });

@@ -7,7 +7,7 @@ Vue.use(VueRouter);
 
 const routes = [
     {
-        path: '/main-page',
+        path: '/',
         component: MainPage,
         beforeEnter: (to, from, next) => {
             next((vm) => {
@@ -16,6 +16,12 @@ const routes = [
         },
     },
     { path: '/create-event-page', component: CreateEventPage },
+    {
+        path: '/create-event-page/:eventId',
+        name: 'eventEditPage',
+        component: CreateEventPage,
+        props: true,
+    },
 ];
 
 export default new VueRouter({

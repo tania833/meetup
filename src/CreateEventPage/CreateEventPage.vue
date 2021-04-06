@@ -15,13 +15,29 @@ export default Vue.extend({
         showModalFailure() {
             return this.$store.state.failureEventAdding;
         },
+        showModalSuccessEdit() {
+            return this.$store.state.successEventEdit;
+        },
+        showModalFailureEdit() {
+            return this.$store.state.failureEventEdit;
+        },
     },
     methods: {
         closeSucess() {
             this.$store.commit('SUCCESS_EVENT_ADDED', false);
+            this.$router.push('/');
         },
         closeFailure() {
             this.$store.commit('FAILURE_EVENT_ADDED', false);
+            this.$router.push('/');
+        },
+        closeSucessEdit() {
+            this.$store.commit('SUCCESS_EVENT_EDIT', false);
+            this.$router.push('/');
+        },
+        closeFailureEdit() {
+            this.$store.commit('FAILURE_EVENT_EDIT', false);
+            this.$router.push('/');
         },
     },
 });
