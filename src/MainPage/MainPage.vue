@@ -4,9 +4,15 @@
 import Vue from 'vue';
 import EventCard from '../lib/eventCard/EventCard.vue';
 import Modal from '../lib/modal/Modal.vue';
+import DatePicker from '../lib/datePicker/DatePicker.vue';
 export default Vue.extend({
     name: 'MainPage',
-    components: { EventCard, Modal },
+    components: { EventCard, Modal, DatePicker },
+    data() {
+        return {
+            showFilters: false,
+        };
+    },
     beforeMount() {
         this.$store.dispatch('getEvents');
     },
@@ -20,6 +26,9 @@ export default Vue.extend({
         showModalFailure() {
             return this.$store.state.failureEventDeleted;
         },
+        dateFilters() {
+            return this.$store.state.dates;
+        },
     },
     methods: {
         closeSucess() {
@@ -27,6 +36,11 @@ export default Vue.extend({
         },
         closeFailure() {
             this.$store.commit('FAILURE_EVENT_DELETE', false);
+        },
+    },
+    watch: {
+        dateFilters() {
+            this.$store.dispatch('getEvents');
         },
     },
 });

@@ -9,6 +9,7 @@ export default Vue.extend({
         eventName: '',
         email: '',
         date: '',
+        isoDate: '',
         location: '',
         attendees: '',
         id: '',
@@ -39,6 +40,7 @@ export default Vue.extend({
                 this.eventName = eventEdited.eventname;
                 this.email = eventEdited.email;
                 this.date = eventEdited.date;
+                this.isoDate = eventEdited.isoDate;
                 this.location = eventEdited.location;
                 this.attendees = eventEdited.attendees;
                 this.id = eventEdited.id;
@@ -58,10 +60,12 @@ export default Vue.extend({
                 return false;
             } else {
                 this.error = [];
+
                 const eventAdded = {
                     eventname: this.eventName,
                     email: this.email,
                     date: this.date,
+                    isoDate: this.createIsoDate(this.date),
                     location: this.location,
                     attendees: this.attendees,
                     id: this.id ? this.id : Math.random(),
@@ -103,6 +107,12 @@ export default Vue.extend({
                 }
                 this.$refs.meetupForm.reset();
             }
+        },
+        fixDate(date) {
+            return date.substr(3, 2) + '.' + date.substr(0, 2) + date.slice(5);
+        },
+        createIsoDate(date) {
+            return new Date(this.fixDate(date)).toISOString();
         },
     },
 });

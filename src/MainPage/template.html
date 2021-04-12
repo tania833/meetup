@@ -1,9 +1,13 @@
 <div class="mainPage-content">
-    <ul v-if="allEvents.length">
-        <li v-for="event in allEvents" :key="event.id">
-            <event-card v-bind:event="event"></event-card>
-        </li>
-    </ul>
+    <v-btn @click="showFilters = !showFilters">Filter</v-btn>
+    <date-picker v-if="showFilters" />
+    <div v-if="allEvents.length">
+        <ul>
+            <li v-for="event in allEvents" :key="event.id">
+                <event-card v-bind:event="event"></event-card>
+            </li>
+        </ul>
+    </div>
     <div v-else>There are no events yet</div>
     <modal
         v-if="showModalSuccess"

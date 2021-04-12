@@ -18,9 +18,7 @@
         </v-list-item-content>
         <div class="event-card__icons">
             <router-link :to="{ name: 'eventEditPage', params: { eventId: id }}"
-                ><v-icon>
-                    {{ icons.mdiPencil}}
-                </v-icon></router-link
+                ><v-icon> {{ icons.mdiPencil}} </v-icon></router-link
             >
             <v-icon @click="deleteEvent(id)"> {{ icons.mdiDelete }} </v-icon>
         </div>

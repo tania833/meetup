@@ -1,0 +1,5 @@
+<v-app id="inspire">
+    <v-date-picker v-model="dates" range header-color="error"></v-date-picker>
+    <v-btn @click="setDates(dates)" color="error">Set dates</v-btn>
+    <v-btn @click="setDates({})" class="clear-filter-btn" color="primary">Clear filter</v-btn>
+</v-app>

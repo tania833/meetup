@@ -8,6 +8,10 @@ export const createStore = () =>
     new Vuex.Store({
         state: {
             events: [],
+            dates: {
+                from: '',
+                to: '',
+            },
             successEventAdded: false,
             failureEventAdding: false,
             successEventDeleted: false,
@@ -61,11 +65,16 @@ export const createStore = () =>
             FAILURE_EVENT_EDIT(state, value) {
                 state.failureEventEdit = value;
             },
+            SET_DATES(state, value) {
+                state.dates = value;
+            },
         },
         actions: {
             getEvents({ commit }) {
                 axios
-                    .get('http://localhost:8000/all-events')
+                    .get(
+                        `http://localhost:8000/all-events/?from=${this.state.dates?.from}&to=${this.state.dates?.to}`
+                    )
                     .then((response) => {
                         commit('FETCH_EVENTS', response.data);
                     })
