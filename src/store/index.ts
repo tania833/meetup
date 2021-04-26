@@ -1,8 +1,17 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import axios from 'axios';
-
+import { IEvent, IDateFilter, IModalState } from '../types/types';
+import { baseUrl } from '../lib/api/baseUrl';
+import { getEvents } from '../lib/api/api'
 Vue.use(Vuex);
+
+export interface ITypesState {
+    events: IEvent[];
+    dates: IDateFilter;
+    modalState: IModalState;
+    eventEditing: boolean;
+}
 
 export const createStore = () =>
     new Vuex.Store({
@@ -12,22 +21,20 @@ export const createStore = () =>
                 from: '',
                 to: '',
             },
-            successEventAdded: false,
-            failureEventAdding: false,
-            successEventDeleted: false,
-            failureEventDeleted: false,
-            successEventEdit: false,
-            failureEventEdit: false,
+            modalState: {
+                modalStateType: '',
+                showModal: false,
+            },
             eventEditing: false,
         },
         mutations: {
-            FETCH_EVENTS(state, events) {
+            FETCH_EVENTS(state, events: IEvent[]) {
                 state.events = events;
             },
-            ADD_EVENT_TO_STORE(state, event) {
+            ADD_EVENT_TO_STORE(state, event: IEvent) {
                 state.events.push(event);
             },
-            EDIT_EVENT_IN_STORE(state, eventEdited) {
+            EDIT_EVENT_IN_STORE(state, eventEdited: IEvent) {
                 const eventPrevious = state.events.filter(
                     (el) => el.id === eventEdited.id
                 );
@@ -38,62 +45,49 @@ export const createStore = () =>
                     state.events[indexOfEventEdited] = eventEdited;
                 }
             },
-            DELETE_EVENT_FROM_STORE(state, eventId) {
+            DELETE_EVENT_FROM_STORE(state, eventId: number) {
                 const filteredEvents = state.events.filter(
                     (el) => el.id != eventId
                 );
                 state.events = filteredEvents;
             },
-            SUCCESS_EVENT_ADDED(state, value) {
-                state.successEventAdded = value;
+            SET_MODAL_STATE(state, value: IModalState) {
+                const { modalStateType, showModal } = value;
+                state.modalState.modalStateType = modalStateType;
+                state.modalState.showModal = showModal;
             },
-            FAILURE_EVENT_ADDED(state, value) {
-                state.failureEventAdding = value;
-            },
-            SUCCESS_EVENT_DELETE(state, value) {
-                state.successEventDeleted = value;
-            },
-            FAILURE_EVENT_DELETE(state, value) {
-                state.failureEventDeleted = value;
+            SET_FILTER_DATES(state, value: IDateFilter) {
+                state.dates = value;
             },
             SET_EVENT_EDITING(state, value) {
                 state.eventEditing = value;
             },
-            SUCCESS_EVENT_EDIT(state, value) {
-                state.successEventEdit = value;
-            },
-            FAILURE_EVENT_EDIT(state, value) {
-                state.failureEventEdit = value;
-            },
-            SET_DATES(state, value) {
-                state.dates = value;
-            },
         },
         actions: {
             getEvents({ commit }) {
-                axios
-                    .get(
-                        `http://localhost:8000/all-events/?from=${this.state.dates?.from}&to=${this.state.dates?.to}`
-                    )
+                    getEvents({
+                        from: this.state.dates.from,
+                        to: this.state.dates.to
+                    })
                     .then((response) => {
                         commit('FETCH_EVENTS', response.data);
                     })
-                    .catch((err) => console.log(err));
+                    .catch((err) => console.error(err));
             },
-            addEvent(state, event) {
-                return axios.post('http://localhost:8000/event-add', event);
+            addEvent(state, event: IEvent) {
+                return axios.post(`${baseUrl}/event-add`, event);
             },
-            deleteEvent(state, eventId) {
-                return axios.post('http://localhost:8000/event-delete', {
+            deleteEvent(state, eventId: number) {
+                return axios.post(`${baseUrl}/event-delete`, {
                     id: eventId,
                 });
             },
-            getEventById(state, eventId) {
-                return axios.post('http://localhost:8000/event-find-by-id', {
+            getEventById(state, eventId: number) {
+                return axios.post(`${baseUrl}/event-find-by-id`, {
                     id: eventId,
                 });
             },
-            updateEvent(state, editedEvent) {
+            updateEvent(state, editedEvent: IEvent) {
                 return axios.post(
                     'http://localhost:8000/event-update',
                     editedEvent

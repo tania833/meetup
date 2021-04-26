@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import MainPage from '../MainPage/MainPage.vue';
-import CreateEventPage from '../CreateEventPage/CreateEventPage.vue';
+import MainPage from '../pages/MainPage/MainPage.vue';
+import CreateEventPage from '../pages/CreateEventPage/CreateEventPage.vue';
 
 Vue.use(VueRouter);
 

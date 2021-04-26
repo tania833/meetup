@@ -1,13 +1,20 @@
 <transition name="modal">
     <div class="modal-mask">
         <div class="modal-wrapper">
+            <div
+                class="modal-transparent-wrapper"
+                @click="$emit('close')"
+            ></div>
             <div class="modal-container">
-                <div class="modal-header" v-bind:style="{ color: propColor }">
-                    <slot name="header"> {{title}} </slot>
+                <div
+                    class="modal-header"
+                    v-bind:style="{ color: getModalProperties.color }"
+                >
+                    <slot name="header"> {{ getModalProperties.title }} </slot>
                 </div>
 
                 <div class="modal-body">
-                    <slot name="body"> {{subtitle}} </slot>
+                    <slot name="body"> {{ getModalProperties.subtitle }} </slot>
                 </div>
 
                 <div class="modal-footer">

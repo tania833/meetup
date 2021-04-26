@@ -2,21 +2,37 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import { MODAL_PROPERTIES } from './modal-properties';
 export default Vue.extend({
     name: 'modal',
-    props: ['title', 'subtitle', 'propColor'],
+    computed: {
+        getModalStateType() {
+            return this.$store.state.modalState.modalStateType;
+        },
+        getModalProperties() {
+            return MODAL_PROPERTIES[this.getModalStateType];
+        },
+    },
 });
 </script>
 
 <style>
-.modal-mask {
+.modal-transparent-wrapper{
     position: fixed;
-    z-index: 9998;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+}
+.modal-mask {
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     display: table;
     transition: opacity 0.3s ease;
 }
@@ -35,6 +51,8 @@ export default Vue.extend({
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
     transition: all 0.3s ease;
     font-family: Helvetica, Arial, sans-serif;
+    z-index: 999999;
+
 }
 
 .modal-header {

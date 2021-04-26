@@ -9,6 +9,7 @@
         </div>
         <app-navigation />
         <router-view />
+        <modal v-if="showModal" @close="close" />
     </div>
 </template>
 
@@ -16,10 +17,27 @@
 import Vue from 'vue';
 import Vuetify from 'vuetify/lib';
 import AppNavigation from './lib/navigation/AppNavigation.vue';
+import Modal from './lib/modal/Modal.vue';
 export default Vue.extend({
-    components: { AppNavigation },
+    components: { AppNavigation, Modal },
     name: 'app',
     vuetify: new Vuetify(),
+    computed: {
+        showModal() {
+            return this.$store.state.modalState.showModal;
+        },
+    },
+    methods: {
+        close() {
+            this.$store.commit('SET_MODAL_STATE', {
+                modalStateType: 'RESET',
+                showModal: false,
+            });
+            if (this.$route.path !== '/') {
+                this.$router.push('/');
+            }
+        },
+    },
 });
 </script>
 

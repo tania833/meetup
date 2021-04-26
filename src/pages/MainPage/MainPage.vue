@@ -2,12 +2,12 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import EventCard from '../lib/eventCard/EventCard.vue';
-import Modal from '../lib/modal/Modal.vue';
-import DatePicker from '../lib/datePicker/DatePicker.vue';
+import EventCard from '../../lib/eventCard/EventCard.vue';
+import Modal from '../../lib/modal/Modal.vue';
+import DatePicker from '../../lib/datePicker/DatePicker.vue';
 export default Vue.extend({
     name: 'MainPage',
-    components: { EventCard, Modal, DatePicker },
+    components: { EventCard, DatePicker },
     data() {
         return {
             showFilters: false,
@@ -20,22 +20,17 @@ export default Vue.extend({
         allEvents() {
             return this.$store.state.events;
         },
-        showModalSuccess() {
-            return this.$store.state.successEventDeleted;
-        },
-        showModalFailure() {
-            return this.$store.state.failureEventDeleted;
-        },
         dateFilters() {
             return this.$store.state.dates;
         },
     },
     methods: {
-        closeSucess() {
-            this.$store.commit('SUCCESS_EVENT_DELETE', false);
-        },
-        closeFailure() {
-            this.$store.commit('FAILURE_EVENT_DELETE', false);
+        filterButtonClick() {
+            this.showFilters = !this.showFilters;
+            this.$store.commit('SET_FILTER_DATES', {
+                from: '',
+                to: '',
+            });
         },
     },
     watch: {

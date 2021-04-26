@@ -7,14 +7,13 @@
             method="post"
             ref="meetupForm"
             id="meetupForm"
-            v-model="valid"
             @submit.prevent="submit"
         >
             <v-container>
                 <v-row>
                     <v-col cols="12">
                         <v-text-field
-                            v-model="eventName"
+                            v-model="event.name"
                             :rules="nameRules"
                             label="Event name"
                             required
@@ -23,7 +22,7 @@
 
                     <v-col cols="12">
                         <v-text-field
-                            v-model="email"
+                            v-model="event.email"
                             :rules="emailRules"
                             label="E-mail"
                             required
@@ -32,16 +31,16 @@
 
                     <v-col cols="12">
                         <v-text-field
-                            v-model="date"
-                            :rules="dateRules"
+                            v-model="event.date"
                             label="Date"
                             required
+                            type="date"
                         ></v-text-field>
                     </v-col>
 
                     <v-col cols="12">
                         <v-text-field
-                            v-model="location"
+                            v-model="event.location"
                             :rules="locationRules"
                             label="Location"
                             required
@@ -50,10 +49,11 @@
 
                     <v-col cols="12">
                         <v-text-field
-                            v-model="attendees"
+                            v-model="event.attendees"
                             :rules="attendeesRules"
-                            label="Attendees"
+                            label="Number of attendees"
                             required
+                            maxlength="2"
                         ></v-text-field>
                     </v-col>
                 </v-row>
