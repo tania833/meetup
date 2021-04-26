@@ -17,10 +17,10 @@ export default Vue.extend({
         this.$store.dispatch('getEvents');
     },
     computed: {
-        allEvents() {
+        getAllEvents() {
             return this.$store.state.events;
         },
-        dateFilters() {
+        getDateFilters() {
             return this.$store.state.dates;
         },
     },
@@ -34,7 +34,7 @@ export default Vue.extend({
         },
     },
     watch: {
-        dateFilters() {
+        getDateFilters() {
             this.$store.dispatch('getEvents');
         },
     },

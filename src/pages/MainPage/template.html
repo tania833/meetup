@@ -1,9 +1,9 @@
 <div class="mainPage-content">
     <v-btn @click="filterButtonClick">Filter</v-btn>
     <date-picker v-if="showFilters" />
-    <div v-if="allEvents.length">
+    <div v-if="getAllEvents.length">
         <ul>
-            <li v-for="event in allEvents" :key="event.id">
+            <li v-for="event in getAllEvents" :key="event.id">
                 <event-card v-bind:event="event"></event-card>
             </li>
         </ul>

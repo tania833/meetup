@@ -17,7 +17,7 @@ export default Vue.extend({
 </script>
 
 <style>
-.modal-transparent-wrapper{
+.modal-transparent-wrapper {
     position: fixed;
     top: 0;
     left: 0;
@@ -52,7 +52,6 @@ export default Vue.extend({
     transition: all 0.3s ease;
     font-family: Helvetica, Arial, sans-serif;
     z-index: 999999;
-
 }
 
 .modal-header {

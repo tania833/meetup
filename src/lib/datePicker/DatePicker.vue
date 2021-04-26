@@ -10,6 +10,12 @@ export default Vue.extend({
     }),
     methods: {
         setDates(value) {
+            this.$store.commit(
+                'SET_FILTER_DATES',
+                this.prepareDatesForRequest(value)
+            );
+        },
+        prepareDatesForRequest(dates) {
             let eventDates = [];
             let sortedDates = [];
             let readyForReqDates = {
@@ -17,23 +23,26 @@ export default Vue.extend({
                 to: '',
             };
 
-            if (value.length > 0) {
-                eventDates[0] = new Date(value[0]).toISOString();
-                if (value[1]) {
-                    eventDates[1] = new Date(value[1]).toISOString();
+            if (dates.length > 0) {
+                eventDates[0] = new Date(dates[0]).toISOString();
+                if (dates[1]) {
+                    eventDates[1] = new Date(dates[1]).toISOString();
                 } else {
-                    eventDates[1] = new Date(new Date(value[0]).setDate(new Date(value[0]).getDate() + 1)).toISOString();
+                    eventDates[1] = new Date(
+                        new Date(dates[0]).setDate(
+                            new Date(dates[0]).getDate() + 1
+                        )
+                    ).toISOString();
                 }
                 sortedDates = eventDates.sort();
                 readyForReqDates = {
                     from: sortedDates[0],
                     to: sortedDates[1],
                 };
+                return readyForReqDates;
             } else {
-                this.dates = [];
+                return [];
             }
-
-            this.$store.commit('SET_FILTER_DATES', readyForReqDates);
         },
     },
 });

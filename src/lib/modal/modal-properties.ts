@@ -38,6 +38,6 @@ export const MODAL_PROPERTIES: ModalPropertiesType = {
     RESET: {
         title: '',
         subtitle: '',
-        color: 'white'
-    }
+        color: 'white',
+    },
 };

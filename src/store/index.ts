@@ -1,9 +1,13 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import axios from 'axios';
 import { IEvent, IDateFilter, IModalState } from '../types/types';
-import { baseUrl } from '../lib/api/baseUrl';
-import { getEvents } from '../lib/api/api'
+import {
+    getEventsApi,
+    addEventApi,
+    deleteEventApi,
+    getEventByIdApi,
+    editEventApi,
+} from '../lib/api/api';
 Vue.use(Vuex);
 
 export interface ITypesState {
@@ -65,33 +69,26 @@ export const createStore = () =>
         },
         actions: {
             getEvents({ commit }) {
-                    getEvents({
-                        from: this.state.dates.from,
-                        to: this.state.dates.to
-                    })
+                getEventsApi({
+                    from: this.state.dates.from,
+                    to: this.state.dates.to,
+                })
                     .then((response) => {
                         commit('FETCH_EVENTS', response.data);
                     })
                     .catch((err) => console.error(err));
             },
             addEvent(state, event: IEvent) {
-                return axios.post(`${baseUrl}/event-add`, event);
+                return addEventApi(event);
             },
             deleteEvent(state, eventId: number) {
-                return axios.post(`${baseUrl}/event-delete`, {
-                    id: eventId,
-                });
+                return deleteEventApi(eventId);
             },
             getEventById(state, eventId: number) {
-                return axios.post(`${baseUrl}/event-find-by-id`, {
-                    id: eventId,
-                });
+                return getEventByIdApi(eventId);
             },
             updateEvent(state, editedEvent: IEvent) {
-                return axios.post(
-                    'http://localhost:8000/event-update',
-                    editedEvent
-                );
+                return editEventApi(editedEvent);
             },
         },
     });
