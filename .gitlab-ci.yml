@@ -1,8 +1,8 @@
 image: node:latest
 
 stages:
-  # - test
-  # - build
+  - test
+  - build
   - deploy
 
 before_script:
@@ -10,22 +10,23 @@ before_script:
     - apt-get install -y ruby-dev
     - gem install dpl
 
-# test:
-#   stage: test
-#   cache:
-#     paths:
-#     - node_modules/
-#   script:
-#     - yarn test
+test:
+  stage: test
+  cache:
+    paths:
+    - node_modules/
+  script:
+    - yarn install
+    - yarn test
 
-# build:
-#   stage: build
-#   cache:
-#     paths:
-#     - node_modules/
+build:
+  stage: build
+  cache:
+    paths:
+    - node_modules/
 
-#   script:
-#   - yarn build
+  script:
+  - yarn build
 
 
 deploy:
