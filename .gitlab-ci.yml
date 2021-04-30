@@ -1,0 +1,22 @@
+image: node:11.10.1
+
+before_script:
+  - yarn install
+
+test:
+  stage: test
+  cache:
+    paths:
+    - node_modules/
+  script:
+    - yarn test
+
+deploy:
+  stage: deploy
+  cache:
+    paths:
+    - node_modules/
+
+  script:
+  - yarn build
+

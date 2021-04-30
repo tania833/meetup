@@ -9,7 +9,12 @@
         "moduleResolution": "node",
         "outDir": "./dist",
         "rootDir": ".",
-        "types": ["vuetify"]
+        "types": ["vuetify", "jest"],
+        "esModuleInterop": true,
+        "lib": [
+            "es2018",
+            "dom"
+        ]
     },
     "include": ["src"]
 }
