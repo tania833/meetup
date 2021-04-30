@@ -1,5 +1,10 @@
 image: node:14.0.0
 
+stages:
+  - test
+  - build
+  - deploy
+
 before_script:
   - yarn install
 
@@ -11,12 +16,26 @@ test:
   script:
     - yarn test
 
-deploy:
-  stage: deploy
+build:
+  stage: build
   cache:
     paths:
     - node_modules/
 
   script:
-  - yarn build --provider=heroku --app=$HEROKU_APP_STAGING --api-key=$HEROKU_API_KEY
+  - yarn build
+
+
+deploy:
+  stage: deploy
+  image: ruby:latest
+  cache:
+    paths:
+    - node_modules/
+
+  script:
+  - apt-get update -qy
+  - apt-get install rubygems ruby-dev -y
+  - gem install dpl
+  - dpl --provider=heroku --app=$HEROKU_APP_STAGING --api-key=$HEROKU_API_KEY
 
