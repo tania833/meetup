@@ -36,7 +36,9 @@ module.exports = {
                     'vue-style-loader',
                     {
                         loader: MiniCssExtractPlugin.loader,
-                        options: {},
+                        options: {
+                            esModule: false,
+                        },
                     },
                     'css-loader',
                     'postcss-loader',
