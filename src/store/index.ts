@@ -7,7 +7,7 @@ import {
     deleteEventApi,
     getEventByIdApi,
     editEventApi,
-} from '../lib/api/api';
+} from '../api/api';
 Vue.use(Vuex);
 
 export interface ITypesState {
