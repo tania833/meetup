@@ -45,4 +45,7 @@ export default Vue.extend({
 .mainPage-content {
     margin: 10px;
 }
+.mainPage-noEvents{
+    padding: 10px;
+}
 </style>
