@@ -15,6 +15,7 @@ export interface ITypesState {
     dates: IDateFilter;
     modalState: IModalState;
     eventEditing: boolean;
+    showSpinner: boolean;
 }
 
 export const createStore = () =>
@@ -30,6 +31,7 @@ export const createStore = () =>
                 showModal: false,
             },
             eventEditing: false,
+            showSpinner: false,
         },
         mutations: {
             FETCH_EVENTS(state, events: IEvent[]) {
@@ -66,15 +68,20 @@ export const createStore = () =>
             SET_EVENT_EDITING(state, value) {
                 state.eventEditing = value;
             },
+            SET_SPINNER_STATE(state, value: boolean) {
+                state.showSpinner = value;
+            },
         },
         actions: {
             getEvents({ commit }) {
+                commit('SET_SPINNER_STATE', true);
                 getEventsApi({
                     from: this.state.dates.from,
                     to: this.state.dates.to,
                 })
                     .then((response) => {
                         commit('FETCH_EVENTS', response.data);
+                        commit('SET_SPINNER_STATE', false);
                     })
                     .catch((err) => console.error(err));
             },
