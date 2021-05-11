@@ -74,7 +74,9 @@ export const createStore = () =>
         },
         actions: {
             getEvents({ commit }) {
-                commit('SET_SPINNER_STATE', true);
+                if (this.state.events.length == 0) {
+                    commit('SET_SPINNER_STATE', true);
+                }
                 getEventsApi({
                     from: this.state.dates.from,
                     to: this.state.dates.to,
