@@ -23,7 +23,7 @@ export interface IDateFilter {
 }
 
 export interface IModalState {
-    modalStateType: ModalStateTypeEnum;
+    modalStateType?: ModalStateTypeEnum;
     showModal: boolean;
 }
 

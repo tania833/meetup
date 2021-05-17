@@ -27,20 +27,19 @@ export const createStore = () =>
                 to: '',
             },
             modalState: {
-                modalStateType: '',
                 showModal: false,
             },
             eventEditing: false,
             showSpinner: false,
         },
         mutations: {
-            FETCH_EVENTS(state, events: IEvent[]) {
+            FETCH_EVENTS(state: ITypesState, events: IEvent[]) {
                 state.events = events;
             },
-            ADD_EVENT_TO_STORE(state, event: IEvent) {
+            ADD_EVENT_TO_STORE(state: ITypesState, event: IEvent) {
                 state.events.push(event);
             },
-            EDIT_EVENT_IN_STORE(state, eventEdited: IEvent) {
+            EDIT_EVENT_IN_STORE(state: ITypesState, eventEdited: IEvent) {
                 const eventPrevious = state.events.filter(
                     (el) => el.id === eventEdited.id
                 );
@@ -51,21 +50,21 @@ export const createStore = () =>
                     state.events[indexOfEventEdited] = eventEdited;
                 }
             },
-            DELETE_EVENT_FROM_STORE(state, eventId: number) {
+            DELETE_EVENT_FROM_STORE(state: ITypesState, eventId: number) {
                 const filteredEvents = state.events.filter(
                     (el) => el.id != eventId
                 );
                 state.events = filteredEvents;
             },
-            SET_MODAL_STATE(state, value: IModalState) {
+            SET_MODAL_STATE(state: ITypesState, value: IModalState) {
                 const { modalStateType, showModal } = value;
                 state.modalState.modalStateType = modalStateType;
                 state.modalState.showModal = showModal;
             },
-            SET_FILTER_DATES(state, value: IDateFilter) {
+            SET_FILTER_DATES(state: ITypesState, value: IDateFilter) {
                 state.dates = value;
             },
-            SET_EVENT_EDITING(state, value) {
+            SET_EVENT_EDITING(state: ITypesState, value) {
                 state.eventEditing = value;
             },
             SET_SPINNER_STATE(state, value: boolean) {
